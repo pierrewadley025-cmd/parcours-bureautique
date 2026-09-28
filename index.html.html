@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maîtrise de l'Outil Informatique — Parcours Bureautique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16213E; --navy2:#1F2D57; --gold:#B8912F; --gold-light:#E4C765;
+  --paper:#FAF9F6; --card:#FFFFFF; --ink:#1B1D22; --muted:#66707F;
+  --green:#2F7A4D; --red:#B4432D; --border:#E4E1D8;
+  --cred:#9C1C1C; --cgold:#C9A227;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--paper:#12141A;--card:#1B1E27;--ink:#EDEEF2;--muted:#9AA3B2;--border:#2B2F3B;}
+}
+:root[data-theme="dark"]{--paper:#12141A;--card:#1B1E27;--ink:#EDEEF2;--muted:#9AA3B2;--border:#2B2F3B;}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;}
+.wrap{max-width:760px;margin:0 auto;padding:32px 20px 80px;}
+header.top{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#F4F1E8;padding:40px 20px 32px;border-bottom:4px solid var(--gold);}
+header.top .inner{max-width:760px;margin:0 auto;}
+h1{font-family:'Fraunces',serif;font-weight:700;font-size:1.7rem;margin:0 0 6px;}
+header.top p{margin:0 0 20px;color:#C9CEDB;max-width:60ch;}
+.progress-shell{background:rgba(255,255,255,.14);border-radius:8px;height:10px;overflow:hidden;}
+.progress-fill{background:var(--gold-light);height:100%;width:0%;transition:width .4s ease;}
+.progress-label{display:flex;justify-content:space-between;font-size:.85rem;color:#DADFEB;margin-top:8px;}
+.module{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-top:18px;overflow:hidden;}
+.module summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;gap:14px;font-family:'Fraunces',serif;font-size:1.15rem;font-weight:600;}
+.module summary::-webkit-details-marker{display:none}
+.mod-meta{font-family:'Inter',sans-serif;font-weight:400;font-size:.78rem;color:var(--muted);display:block;margin-top:2px;}
+.badge{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--muted);flex-shrink:0;}
+.module[data-done="true"] .badge{background:var(--green);border-color:var(--green);color:#fff;}
+.chev{margin-left:auto;color:var(--muted);transition:transform .2s;}
+.module[open] .chev{transform:rotate(180deg)}
+.mod-body{padding:4px 20px 24px;border-top:1px solid var(--border);}
+.lesson{border:1px solid var(--border);border-radius:8px;margin-top:16px;padding:16px 18px;background:var(--paper);}
+.lesson.locked{opacity:.5;}
+.lesson-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;margin-bottom:10px;font-family:'Fraunces',serif;}
+.lesson-badge{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted);background:var(--card);}
+.lesson.done .lesson-badge{background:var(--green);border-color:var(--green);color:#fff;}
+.objectives{background:rgba(184,145,47,.08);border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:12px;font-size:.87rem;}
+.objectives strong{display:block;margin-bottom:4px;}
+.objectives ul{margin:0;padding-left:18px;}
+.content-text{font-size:.9rem;color:var(--ink);}
+.content-text h4{font-size:.88rem;margin:14px 0 4px;color:var(--navy2);}
+.content-text ul,.content-text ol{margin:4px 0 8px;padding-left:20px;}
+.content-text table{border-collapse:collapse;width:100%;margin:8px 0;font-size:.83rem;}
+.content-text td{border:1px solid var(--border);padding:5px 8px;}
+.exercise{background:#F0F6F1;border-left:3px solid var(--green);padding:10px 14px;border-radius:0 6px 6px 0;margin:12px 0;font-size:.87rem;}
+:root[data-theme="dark"] .exercise, @media (prefers-color-scheme:dark){.exercise{background:rgba(47,122,77,.12)}}
+.exercise strong{display:block;margin-bottom:4px;}
+.exercise ol{margin:4px 0 0;padding-left:20px;}
+.video-link{display:inline-flex;align-items:center;gap:8px;margin:10px 0;padding:8px 14px;background:var(--navy);color:#fff;text-decoration:none;border-radius:6px;font-weight:600;font-size:.85rem;}
+.video-link:hover{background:var(--navy2)}
+.video-caption{font-size:.78rem;color:var(--muted);margin:-4px 0 8px;}
+.check-row{display:flex;align-items:center;gap:10px;margin:10px 0 0;font-size:.9rem;}
+.check-row input{width:18px;height:18px;accent-color:var(--green);}
+.quiz-box{border:1px solid var(--border);border-radius:8px;margin-top:18px;padding:16px 18px;background:var(--card);}
+.quiz-box h4{font-family:'Fraunces',serif;margin:0 0 10px;}
+.q{margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.q:last-of-type{border-bottom:none}
+.q p{font-weight:600;margin:0 0 8px;font-size:.92rem;}
+.q label{display:block;padding:7px 10px;border:1px solid var(--border);border-radius:6px;margin-bottom:5px;cursor:pointer;font-size:.88rem;background:var(--paper);}
+.q label:hover{border-color:var(--gold)}
+.q input{margin-right:8px;accent-color:var(--gold);}
+.quiz-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px;}
+button{font-family:'Inter',sans-serif;font-weight:600;border:none;border-radius:6px;padding:10px 18px;cursor:pointer;font-size:.9rem;}
+.btn-primary{background:var(--gold);color:#231C08;}
+.btn-primary:hover:not(:disabled){background:var(--gold-light)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.quiz-result{font-size:.85rem;font-weight:600;}
+.quiz-result.pass{color:var(--green)}
+.quiz-result.fail{color:var(--red)}
+.project-box{border:1px solid var(--gold);border-radius:8px;margin-top:18px;padding:16px 18px;background:rgba(184,145,47,.06);}
+.project-box h4{font-family:'Fraunces',serif;margin:0 0 8px;}
+.project-box ol{margin:6px 0 10px;padding-left:20px;font-size:.88rem;}
+.locked-msg{font-size:.83rem;color:var(--muted);font-style:italic;margin-top:14px;}
+section.cert{margin-top:36px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:28px 24px;text-align:center;}
+.lock{color:var(--muted);font-size:.95rem;}
+.name-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+.name-row input{padding:10px 14px;border:1px solid var(--border);border-radius:6px;font-size:.95rem;min-width:220px;font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);}
+.locked-note{font-size:.8rem;color:var(--muted);margin-top:10px;}
+#certificate{display:none;margin-top:24px;position:relative;overflow:hidden;border:2px solid var(--cgold);border-radius:8px;padding:46px 34px 38px;background:#FFFDF8;color:#241A12;box-shadow:0 0 0 6px #fff, 0 0 0 8px var(--cgold);}
+#certificate svg.deco{position:absolute;pointer-events:none;}
+#certificate .deco.tl{top:-30px;left:-40px;width:200px;}
+#certificate .deco.br{bottom:-30px;right:-40px;width:200px;transform:rotate(180deg);}
+#certificate .content{position:relative;z-index:1;}
+#certificate .eyebrow{font-size:.72rem;letter-spacing:2px;color:var(--cgold);font-weight:700;}
+#certificate h2{font-family:'Playfair Display',serif;font-weight:700;font-size:2rem;color:var(--cred);margin:4px 0 2px;}
+#certificate .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:#3a2a1c;margin:0 0 22px;}
+#certificate .presented{color:#5b4a3a;font-size:.95rem;margin-bottom:6px;}
+#certificate .learner{font-family:'Alex Brush',cursive;font-size:2.6rem;color:var(--cred);margin:6px 0 18px;}
+#certificate .course{font-size:.92rem;color:#4a3c2e;max-width:44ch;margin:0 auto 26px;}
+#certificate hr{border:none;border-top:1px solid var(--cgold);width:60%;margin:0 auto 22px;}
+#certificate .sig-row{display:flex;justify-content:center;gap:70px;margin-top:10px;font-size:.8rem;color:#4a3c2e;}
+#certificate .sig-block{text-align:center;min-width:150px;border-top:1px solid #4a3c2e;padding-top:6px;}
+.signature{font-family:'Alex Brush',cursive;font-size:1.5rem;color:var(--cred);display:block;margin-bottom:2px;}
+.print-btn{margin-top:20px;background:var(--navy);color:#fff;}
+@media print{
+  body{visibility:hidden;background:#fff;}
+  #certificate,#certificate *{visibility:visible;}
+  #certificate{display:block !important;position:absolute;top:0;left:0;width:100%;}
+}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:40px;}
+</style>
+</head>
+<body>
+<header class="top"><div class="inner">
+<h1>Maîtrise de l'Outil Informatique</h1>
+<p>Parcours Bureautique — Windows, Word, Excel, PowerPoint, Access. Lisez chaque leçon, regardez la vidéo associée, puis validez le quiz et le projet du module.</p>
+<div class="progress-shell"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-label"><span id="progressText">0 / 5 modules validés</span><span id="progressPct">0%</span></div>
+</div></header>
+
+<div class="wrap">
+<div id="modules"></div>
+
+<section class="cert" id="certSection">
+  <h2 style="font-family:'Fraunces',serif;margin:0 0 8px;">Certificat de réussite</h2>
+  <p class="lock" id="lockMsg">🔒 Validez les 5 modules (leçons + quiz + projet) pour débloquer votre certificat.</p>
+  <div id="unlockArea" style="display:none">
+    <p style="color:var(--muted);font-size:.9rem;">Bravo, vous avez validé les 5 modules ! Entrez votre nom pour générer votre certificat.</p>
+    <div class="name-row">
+      <input type="text" id="learnerName" placeholder="Votre nom complet">
+      <button class="btn-primary" id="genCertBtn">Générer mon certificat</button>
+    </div>
+    <p class="locked-note">Une fois généré, le certificat reste associé à ce nom et ne peut plus être remplacé par un autre.</p>
+  </div>
+
+  <div id="certificate">
+    <svg class="deco tl" viewBox="0 0 200 200"><path d="M0 0 H200 V40 C120 10 60 60 40 120 C25 165 10 190 0 200 Z" fill="#9C1C1C" opacity="0.9"/><path d="M0 0 H160 V25 C100 15 55 55 35 100 C22 130 10 160 0 175 Z" fill="#C9A227" opacity="0.85"/></svg>
+    <svg class="deco br" viewBox="0 0 200 200"><path d="M0 0 H200 V40 C120 10 60 60 40 120 C25 165 10 190 0 200 Z" fill="#9C1C1C" opacity="0.9"/><path d="M0 0 H160 V25 C100 15 55 55 35 100 C22 130 10 160 0 175 Z" fill="#C9A227" opacity="0.85"/></svg>
+    <div class="content">
+      <div class="eyebrow">CERTIFICAT</div>
+      <h2>DE RÉUSSITE</h2>
+      <div class="sub">Parcours Bureautique</div>
+      <p class="presented">Ce certificat est décerné avec fierté à</p>
+      <div class="learner" id="certName">—</div>
+      <hr>
+      <p class="course">pour avoir suivi et validé avec succès les 5 modules du parcours (Windows, Word, Excel, PowerPoint, Access), incluant l'ensemble des leçons, quiz et projets.</p>
+      <div class="sig-row">
+        <div class="sig-block"><span id="certDate">—</span><div>Date</div></div>
+        <div class="sig-block"><span class="signature">Wadley Pierre</span><div>Wadley PIERRE — Responsable de la formation</div></div>
+      </div>
+    </div>
+  </div>
+  <button class="print-btn" id="printBtn" style="display:none">🖨️ Imprimer / Enregistrer en PDF</button>
+</section>
+</div>
+<footer>Formation Bureautique — 5 modules · Responsable : Wadley PIERRE</footer>
+
+<script>
+/* Schéma d'un module :
+   { id, name, level, duration, lessons:[{title, objectives:[], html, exercise:[], video, videoCaption}],
+     quiz:{questions:[{q,o:[],c}]}, project:{text, steps:[]} }
+   Le Module 1 (Windows) a le contenu complet fourni par le formateur.
+   Les modules 2 à 5 gardent pour l'instant une seule leçon (playlist complète) + quiz, en attendant un contenu aussi détaillé. */
+const MODULES = [
+{id:'windows',name:'Windows — L\'environnement de travail',level:'Débutant → Intermédiaire',duration:'5 heures',
+ lessons:[
+  {title:'1.1 — Découverte de l\'environnement Windows',
+   objectives:["Identifier les éléments principaux du Bureau Windows","Utiliser la barre des tâches et le menu Démarrer","Lancer un programme par plusieurs méthodes"],
+   html:`<h4>1.1.1 Le Bureau (Desktop)</h4>
+    <p>Le Bureau est le premier écran que vous voyez après le démarrage de l'ordinateur. C'est votre espace de travail principal : il contient des icônes (raccourcis vers des programmes ou fichiers) et un arrière-plan personnalisable.</p>
+    <ul><li><strong>Icônes :</strong> représentent des programmes, dossiers ou fichiers. Un double-clic les ouvre.</li>
+    <li><strong>Corbeille :</strong> contient les fichiers supprimés (récupérables avant vidage définitif).</li>
+    <li><strong>Fond d'écran :</strong> personnalisable via Paramètres &gt; Personnalisation.</li></ul>
+    <h4>1.1.2 La barre des tâches</h4>
+    <p>Située en bas de l'écran par défaut, elle affiche :</p>
+    <ul><li>Le menu Démarrer (icône Windows, en bas à gauche)</li><li>La barre de recherche</li><li>Les programmes épinglés et ouverts</li><li>La zone de notification (heure, réseau, volume, batterie) à droite</li></ul>
+    <h4>1.1.3 Le menu Démarrer</h4>
+    <p>C'est le point d'accès central à tous vos programmes, paramètres et fichiers récents. Pour l'ouvrir : cliquez sur l'icône Windows ou appuyez sur la touche Windows du clavier.</p>
+    <p><strong>Méthodes pour lancer un programme :</strong></p>
+    <ol><li>Cliquer sur son icône épinglée dans la barre des tâches</li><li>Ouvrir le menu Démarrer et cliquer sur le programme dans la liste</li><li>Taper le nom du programme dans la barre de recherche puis appuyer sur Entrée</li><li>Double-cliquer sur un raccourci présent sur le Bureau</li></ol>`,
+   exercise:["Ouvrez le menu Démarrer et repérez trois programmes installés sur votre ordinateur.","Utilisez la barre de recherche pour lancer la Calculatrice.","Épinglez la Calculatrice à la barre des tâches (clic droit &gt; Épingler à la barre des tâches).","Modifiez le fond d'écran de votre Bureau depuis les Paramètres."],
+   video:'https://www.youtube.com/results?search_query=Les+premiers+pas+dans+votre+nouveau+Windows+10',
+   videoCaption:'Les premiers pas dans votre nouveau Windows 10 — Prise en main du Bureau, du menu Démarrer et de la barre des tâches.'},
+
+  {title:'1.2 — Gestion des fichiers et dossiers',
+   objectives:["Comprendre l'arborescence des fichiers Windows","Créer, renommer, déplacer, copier et supprimer des fichiers/dossiers","Compresser et décompresser des fichiers"],
+   html:`<h4>1.2.1 L'Explorateur de fichiers</h4>
+    <p>L'Explorateur de fichiers permet de naviguer dans tous les dossiers et fichiers de l'ordinateur. On l'ouvre via l'icône dans la barre des tâches ou avec le raccourci <strong>Windows + E</strong>.</p>
+    <p><strong>Arborescence type :</strong></p>
+    <ul><li><strong>Ce PC :</strong> vue d'ensemble des disques et lecteurs</li><li><strong>Documents :</strong> dossier par défaut pour vos fichiers personnels</li><li><strong>Téléchargements :</strong> reçoit les fichiers téléchargés depuis Internet</li><li><strong>Images / Vidéos / Musique :</strong> dossiers médias par défaut</li></ul>
+    <h4>1.2.2 Opérations de base sur les fichiers</h4>
+    <p><strong>Créer un dossier :</strong> clic droit dans une zone vide &gt; Nouveau &gt; Dossier &gt; taper le nom et valider avec Entrée.</p>
+    <p><strong>Renommer :</strong> clic droit &gt; Renommer, ou sélectionner l'élément et appuyer sur F2.</p>
+    <p><strong>Copier / Déplacer :</strong> Copier = Ctrl+C puis Ctrl+V ; Déplacer = Ctrl+X puis Ctrl+V ; ou glisser-déposer.</p>
+    <p><strong>Supprimer :</strong> Suppr (envoi à la Corbeille) ou Maj+Suppr (suppression définitive, à utiliser avec précaution).</p>
+    <h4>1.2.3 Compression et décompression</h4>
+    <p>La compression regroupe plusieurs fichiers en une seule archive (souvent au format ZIP), ce qui facilite le transfert et réduit la taille.</p>
+    <ol><li>Pour compresser : sélectionner les fichiers &gt; clic droit &gt; Envoyer vers &gt; Dossier compressé</li><li>Pour décompresser : clic droit sur le fichier ZIP &gt; Extraire tout</li></ol>`,
+   exercise:["Créez un dossier nommé « Mes Exercices » dans Documents.","À l'intérieur, créez trois sous-dossiers : Word, Excel, PowerPoint.","Créez un fichier texte vide, renommez-le « Notes de cours ».","Déplacez ce fichier dans le sous-dossier Word par glisser-déposer.","Compressez le dossier « Mes Exercices » en fichier ZIP."],
+   video:'https://www.youtube.com/results?search_query=Cours+d%27informatique+d%C3%A9butant+Les+BASES+de+Windows+10',
+   videoCaption:'Cours d\'informatique débutant : Les BASES de Windows 10 — copier, déplacer, renommer, organiser.'},
+
+  {title:'1.3 — Paramètres essentiels',
+   objectives:["Accéder et modifier les paramètres système principaux","Configurer une connexion réseau et une imprimante","Comprendre la gestion des comptes utilisateurs"],
+   html:`<h4>1.3.1 Accéder aux Paramètres</h4>
+    <p>Ouvrez les Paramètres via le menu Démarrer (icône en forme d'engrenage) ou avec le raccourci <strong>Windows + I</strong>.</p>
+    <h4>1.3.2 Affichage</h4>
+    <p>Luminosité et échelle, résolution d'écran : Paramètres &gt; Système &gt; Affichage. Mode sombre / clair : Paramètres &gt; Personnalisation &gt; Couleurs.</p>
+    <h4>1.3.3 Son</h4>
+    <p>Réglage rapide via l'icône haut-parleur dans la zone de notification, ou réglages détaillés dans Paramètres &gt; Système &gt; Son.</p>
+    <h4>1.3.4 Réseau et Wi-Fi</h4>
+    <ol><li>Cliquer sur l'icône réseau dans la zone de notification</li><li>Sélectionner le réseau Wi-Fi souhaité</li><li>Saisir le mot de passe et se connecter</li></ol>
+    <h4>1.3.5 Imprimantes</h4>
+    <p>Paramètres &gt; Bluetooth et appareils &gt; Imprimantes et scanners &gt; Ajouter un appareil.</p>
+    <h4>1.3.6 Comptes utilisateurs</h4>
+    <p>Windows permet de créer plusieurs comptes sur un même ordinateur, chacun avec ses propres fichiers et paramètres (Paramètres &gt; Comptes &gt; Famille et autres utilisateurs). Types de compte : Administrateur (tous les droits) ou Standard (droits limités).</p>`,
+   exercise:["Activez le mode sombre sur votre ordinateur.","Vérifiez le réseau Wi-Fi actuellement connecté et sa puissance de signal.","Ouvrez la liste des imprimantes et scanners disponibles.","Repérez si votre compte est Administrateur ou Standard."],
+   video:'https://www.youtube.com/playlist?list=PLdlT0LrEqmEwpPA2mobH0LiF8PzemDZHS',
+   videoCaption:'Les tutoriels Windows 11 (playlist) — réglages d\'affichage, de réseau, d\'imprimante et de comptes utilisateurs.'},
+
+  {title:'1.4 — Raccourcis clavier indispensables',
+   objectives:["Mémoriser les raccourcis clavier les plus utiles au quotidien","Gagner en rapidité d'exécution"],
+   html:`<table><tr><td><strong>Ctrl + C</strong></td><td>Copier l'élément sélectionné</td></tr>
+    <tr><td><strong>Ctrl + X</strong></td><td>Couper l'élément sélectionné</td></tr>
+    <tr><td><strong>Ctrl + V</strong></td><td>Coller</td></tr>
+    <tr><td><strong>Ctrl + Z</strong></td><td>Annuler la dernière action</td></tr>
+    <tr><td><strong>Ctrl + Y</strong></td><td>Rétablir l'action annulée</td></tr>
+    <tr><td><strong>Ctrl + A</strong></td><td>Tout sélectionner</td></tr>
+    <tr><td><strong>Ctrl + S</strong></td><td>Enregistrer</td></tr>
+    <tr><td><strong>Alt + Tab</strong></td><td>Basculer entre les fenêtres ouvertes</td></tr>
+    <tr><td><strong>Windows + E</strong></td><td>Ouvrir l'Explorateur de fichiers</td></tr>
+    <tr><td><strong>Windows + D</strong></td><td>Afficher/masquer le Bureau</td></tr>
+    <tr><td><strong>Windows + L</strong></td><td>Verrouiller la session</td></tr>
+    <tr><td><strong>Impr écran</strong></td><td>Capture d'écran complète</td></tr>
+    <tr><td><strong>Windows + Maj + S</strong></td><td>Capture d'écran d'une zone choisie</td></tr>
+    <tr><td><strong>F2</strong></td><td>Renommer l'élément sélectionné</td></tr>
+    <tr><td><strong>Alt + F4</strong></td><td>Fermer la fenêtre active</td></tr></table>`,
+   exercise:["Ouvrez trois fenêtres différentes et basculez entre elles avec Alt + Tab.","Réalisez une capture d'écran d'une zone précise avec Windows + Maj + S.","Verrouillez votre session puis reconnectez-vous."],
+   video:'https://www.youtube.com/results?search_query=Comment+Utiliser+Windows+10+Tutoriels+et+Astuces+Essentielles',
+   videoCaption:'Comment Utiliser Windows 10 : Tutoriels et Astuces Essentielles (playlist) — astuces et raccourcis.'},
+
+  {title:'1.5 — Sécurité et bonnes pratiques',
+   objectives:["Comprendre l'importance des mises à jour et de l'antivirus","Mettre en place une routine de sauvegarde simple"],
+   html:`<h4>1.5.1 Windows Update</h4>
+    <p>Les mises à jour corrigent des failles de sécurité et améliorent la stabilité du système. À vérifier régulièrement dans Paramètres &gt; Windows Update.</p>
+    <h4>1.5.2 Antivirus</h4>
+    <p>Windows intègre nativement Windows Defender, un antivirus gratuit activé par défaut. Il analyse en continu les fichiers et bloque les menaces connues.</p>
+    <h4>1.5.3 Sauvegarde des données</h4>
+    <p>Conservez toujours une copie de vos fichiers importants sur un support externe (clé USB, disque dur externe) ou dans le cloud (OneDrive, Google Drive).</p>
+    <p><strong>Règle des 3-2-1 :</strong> 3 copies, sur 2 supports différents, dont 1 hors site.</p>`,
+   exercise:["Vérifiez si des mises à jour Windows sont en attente.","Ouvrez Windows Defender et lancez une analyse rapide.","Copiez le dossier « Mes Exercices » sur une clé USB ou dans un espace cloud."],
+   video:'https://www.youtube.com/results?search_query=Les+tutoriels+Windows+10',
+   videoCaption:'Les tutoriels Windows 10 (playlist) — mises à jour, Windows Defender et sauvegarde des données.'},
+ ],
+ quiz:{questions:[
+   {q:"Quel raccourci clavier ouvre l'Explorateur de fichiers ?",o:["Windows + D","Windows + E","Ctrl + E","Alt + E"],c:1},
+   {q:"Comment supprimer définitivement un fichier sans passer par la Corbeille ?",o:["Suppr","Ctrl + Suppr","Maj + Suppr","Alt + Suppr"],c:2},
+   {q:"Quel format est généralement utilisé pour compresser des fichiers ?",o:["PDF","ZIP","DOCX","EXE"],c:1},
+   {q:"Quel outil Windows protège l'ordinateur contre les virus par défaut ?",o:["Windows Update","Windows Defender","Explorateur de fichiers","Bureau à distance"],c:1},
+   {q:"Que permet le raccourci Windows + Maj + S ?",o:["Verrouiller la session","Ouvrir les paramètres","Capturer une zone de l'écran","Éteindre l'ordinateur"],c:2},
+ ]},
+ project:{
+   text:"Mise en situation : vous démarrez un nouveau poste et devez organiser votre environnement de travail numérique.",
+   steps:["Créez une arborescence de dossiers organisée pour un usage professionnel (ex. : Clients, Factures, Contrats, Archives).","Personnalisez votre Bureau (fond d'écran, mode d'affichage).","Configurez au moins 3 raccourcis d'applications utiles dans la barre des tâches.","Effectuez une sauvegarde de votre dossier de travail sur un support externe ou cloud.","Rédigez une courte fiche (5 lignes) listant les 5 raccourcis clavier que vous utiliserez le plus souvent."]
+ }},
+
+{id:'word',name:'Word — Traitement de texte',level:'Débutant → Avancé',duration:'6 à 8 heures',
+ lessons:[
+  {title:'2.1 — Bases',
+   objectives:["Se repérer dans l'interface de Word","Créer et enregistrer un document"],
+   html:`<p>L'écran de Word s'organise autour du <strong>ruban</strong> (en haut), qui regroupe les commandes par onglets (Accueil, Insertion, Mise en page…), et de la zone de texte où vous rédigez.</p>
+    <p><strong>Créer un document :</strong> Fichier &gt; Nouveau, ou Ctrl+N.<br><strong>Enregistrer :</strong> Ctrl+S, puis choisissez un nom et l'emplacement. Le format par défaut est <strong>.docx</strong>.</p>`,
+   exercise:["Créez un nouveau document.","Tapez un court paragraphe de présentation de vous-même.","Enregistrez-le sous le nom « Mon premier document »."],
+   video:'https://www.youtube.com/playlist?list=PL8sQnj6qF1Lvo8lXJhtY_RjedsNnARPNY',
+   videoCaption:'Formation Microsoft Word 365 (playlist complète, 56 vidéos) — à suivre au fil des leçons de ce module.'},
+  {title:'2.2 — Mise en forme du texte',
+   objectives:["Appliquer police, taille, style et alignement","Créer des listes à puces et numérotées"],
+   html:`<p>Dans l'onglet <strong>Accueil</strong>, le groupe Police permet de changer la police, la taille, et d'appliquer <strong>gras</strong>, <em>italique</em> ou souligné. Le groupe Paragraphe gère l'alignement (gauche, centré, droit, justifié) et les listes.</p>`,
+   exercise:["Mettez un titre en gras, taille 16.","Alignez un paragraphe en justifié.","Transformez une liste de 4 éléments en liste à puces, puis en liste numérotée."],
+   video:null,videoCaption:''},
+  {title:'2.3 — Mise en page',
+   objectives:["Régler marges et orientation","Ajouter en-têtes, pieds de page et sauts de page"],
+   html:`<p>L'onglet <strong>Mise en page</strong> permet de régler les marges (normales, étroites, personnalisées) et l'orientation (portrait/paysage). Les en-têtes et pieds de page s'ajoutent depuis l'onglet Insertion &gt; En-tête ou Pied de page.</p>
+    <p><strong>Saut de page :</strong> Ctrl+Entrée, pour commencer une nouvelle page sans ajouter de lignes vides.</p>`,
+   exercise:["Passez un document en orientation paysage.","Ajoutez un pied de page avec la numérotation automatique.","Insérez un saut de page avant une nouvelle section."],
+   video:null,videoCaption:''},
+  {title:'2.4 — Insertion d\'objets',
+   objectives:["Insérer images, tableaux, formes et liens hypertextes"],
+   html:`<p>L'onglet <strong>Insertion</strong> regroupe : Image (depuis un fichier, redimensionnable par les poignées), Tableau (choisir le nombre de lignes/colonnes), Formes, et Lien hypertexte (Ctrl+K) pour pointer vers un site ou un autre fichier.</p>`,
+   exercise:["Insérez une image et redimensionnez-la.","Créez un tableau de 3 colonnes sur 4 lignes.","Ajoutez un lien hypertexte vers un site web."],
+   video:null,videoCaption:''},
+  {title:'2.5 — Outils avancés',
+   objectives:["Générer une table des matières automatique","Utiliser le publipostage","Suivre les modifications et commentaires"],
+   html:`<p><strong>Table des matières :</strong> appliquez des styles de titre (Titre 1, Titre 2…) à vos sections, puis Références &gt; Table des matières &gt; insertion automatique.</p>
+    <p><strong>Publipostage :</strong> onglet Publipostage, permet d'envoyer un même document personnalisé (nom, adresse…) à plusieurs destinataires à partir d'une liste (souvent un fichier Excel).</p>
+    <p><strong>Suivi des modifications :</strong> onglet Révision &gt; Suivi des modifications, pour voir et commenter les changements proposés par un collègue.</p>`,
+   exercise:["Appliquez des styles de titre à un document de 2 pages puis générez sa table des matières.","Activez le suivi des modifications et ajoutez un commentaire."],
+   video:null,videoCaption:''},
+  {title:'2.6 — Modèles pratiques',
+   objectives:["Adapter un modèle Word à un besoin réel (CV, lettre, rapport)"],
+   html:`<p>Fichier &gt; Nouveau propose des modèles prêts à l'emploi (CV, lettres, rapports). Partez d'un modèle proche de votre besoin, puis personnalisez le texte, les couleurs et la mise en page tout en gardant une présentation cohérente.</p>`,
+   exercise:["Ouvrez un modèle de CV et remplacez le contenu par le vôtre.","Adaptez les couleurs du modèle à votre goût sans casser la mise en page."],
+   video:null,videoCaption:''},
+ ],
+ quiz:{questions:[
+  {q:"Quel élément permet de créer automatiquement une table des matières ?",o:["Styles de titre + onglet Références","Copier-coller manuel","Insertion d'image","La barre d'état"],c:0},
+  {q:"À quoi sert le publipostage ?",o:["Mettre en forme un tableau","Envoyer le même document personnalisé à plusieurs destinataires","Insérer un graphique","Vérifier l'orthographe"],c:1},
+  {q:"Que modifie l'onglet « Mise en page » ?",o:["Les couleurs du texte","Les marges et l'orientation","Les formules de calcul","Les animations"],c:1},
+  {q:"Comment insérer un saut de page ?",o:["Ctrl+Entrée","Ctrl+S","Ctrl+P","Ctrl+Z"],c:0},
+  {q:"Quel outil permet de voir les modifications proposées par un collègue ?",o:["Le suivi des modifications","Le publipostage","SmartArt","Le presse-papier"],c:0},
+ ]},
+ project:{text:"Réalisez votre propre CV professionnel avec Word, prêt à être envoyé à un recruteur.",
+   steps:["Partez d'un modèle Word ou d'un document vierge.","Structurez les sections : coordonnées, expérience, formation, compétences.","Appliquez une mise en forme cohérente (styles de titre, alignement, police unique).","Insérez éventuellement une photo et un lien hypertexte (LinkedIn, portfolio).","Enregistrez le document en PDF pour l'envoyer."]}},
+
+{id:'excel',name:'Excel — Tableur',level:'Débutant → Avancé',duration:'8 à 10 heures',
+ lessons:[
+  {title:'3.1 — Bases',
+   objectives:["Comprendre la structure d'une feuille de calcul","Reconnaître les types de données"],
+   html:`<p>Une feuille Excel est une grille de <strong>cellules</strong>, repérées par leur colonne et leur ligne (ex. A1). Un classeur peut contenir plusieurs <strong>feuilles</strong> (onglets en bas de l'écran).</p>
+    <p>Types de données courants : texte, nombre, date/heure. Excel adapte automatiquement l'alignement selon le type reconnu.</p>`,
+   exercise:["Créez un tableau simple avec des noms, des dates et des montants.","Ajoutez une deuxième feuille et renommez-la."],
+   video:'https://www.youtube.com/playlist?list=PLdSB9cSVP631xrzbjfvgf84TTkBWgop7n',
+   videoCaption:'Excel Facile — tutoriels complets débutant à avancé (playlist) — à suivre au fil des leçons de ce module.'},
+  {title:'3.2 — Formules essentielles',
+   objectives:["Écrire une formule simple","Utiliser SOMME, MOYENNE, MAX, MIN"],
+   html:`<p>Toute formule commence par <strong>=</strong>. Exemple : <code>=A1+A2</code>. Les fonctions de base s'appliquent à une plage de cellules : <code>=SOMME(A1:A10)</code>, <code>=MOYENNE(A1:A10)</code>, <code>=MAX(A1:A10)</code>, <code>=MIN(A1:A10)</code>.</p>`,
+   exercise:["Calculez la somme et la moyenne d'une colonne de 10 valeurs.","Trouvez la valeur maximale et minimale de cette même colonne."],
+   video:null,videoCaption:''},
+  {title:'3.3 — Fonctions intermédiaires',
+   objectives:["Utiliser SI pour tester une condition","Rechercher une valeur avec RECHERCHEV/RECHERCHEX","Additionner selon un critère avec SOMME.SI"],
+   html:`<p><code>=SI(condition; valeur_si_vrai; valeur_si_faux)</code> teste une condition. <code>=RECHERCHEV(valeur; plage; colonne; FAUX)</code> recherche une valeur dans une colonne et renvoie une information associée (RECHERCHEX est sa version plus récente et plus souple). <code>=SOMME.SI(plage_critère; critère; plage_somme)</code> additionne seulement les cellules qui remplissent une condition.</p>`,
+   exercise:["Utilisez SI pour marquer « Réussi » ou « Échoué » selon une note.","Utilisez RECHERCHEV pour retrouver le prix d'un produit à partir de son nom."],
+   video:null,videoCaption:''},
+  {title:'3.4 — Mise en forme et présentation',
+   objectives:["Appliquer une mise en forme conditionnelle","Utiliser les styles de tableau"],
+   html:`<p>La <strong>mise en forme conditionnelle</strong> (onglet Accueil) change automatiquement l'apparence d'une cellule selon une règle (ex. : rouge si négatif). Les <strong>styles de tableau</strong> appliquent une présentation cohérente (couleurs alternées, en-têtes) en un clic.</p>`,
+   exercise:["Appliquez une règle qui colore en rouge toute valeur négative.","Convertissez une plage de données en tableau avec un style prédéfini."],
+   video:null,videoCaption:''},
+  {title:'3.5 — Analyse de données',
+   objectives:["Trier et filtrer des données","Créer un tableau croisé dynamique simple"],
+   html:`<p><strong>Trier :</strong> Données &gt; Trier, du plus petit au plus grand ou l'inverse. <strong>Filtrer :</strong> Données &gt; Filtrer, pour n'afficher que certaines lignes selon un critère. Un <strong>tableau croisé dynamique</strong> (Insertion &gt; Tableau croisé dynamique) résume et analyse de grandes quantités de données par glisser-déposer des champs.</p>`,
+   exercise:["Triez une liste de ventes par montant décroissant.","Filtrez pour n'afficher qu'une seule catégorie de produits.","Créez un tableau croisé dynamique résumant les ventes par catégorie."],
+   video:null,videoCaption:''},
+  {title:'3.6 — Visualisation',
+   objectives:["Créer un graphique à partir de données"],
+   html:`<p>Sélectionnez vos données puis Insertion &gt; Graphique, et choisissez le type adapté (histogramme, courbe, secteurs). Personnalisez le titre et les couleurs depuis les Outils de graphique.</p>`,
+   exercise:["Créez un graphique en secteurs représentant la répartition d'un budget."],
+   video:null,videoCaption:''},
+  {title:'3.7 — Cas pratiques',
+   objectives:["Appliquer les compétences Excel à des situations réelles"],
+   html:`<p>Trois cas classiques permettent de consolider vos acquis : un <strong>budget personnel</strong> (revenus/dépenses avec formules SOMME), une <strong>facture</strong> (calcul automatique du total avec SOMME et TVA via une formule), et un <strong>suivi de stock</strong> (quantités, alertes via mise en forme conditionnelle).</p>`,
+   exercise:["Choisissez un des trois cas et construisez le fichier Excel correspondant."],
+   video:null,videoCaption:''},
+ ],
+ quiz:{questions:[
+  {q:"Quelle fonction additionne une plage de cellules ?",o:["MOYENNE","SOMME","SI","RECHERCHEV"],c:1},
+  {q:"Quelle fonction permet de tester une condition ?",o:["SI","SOMME","MAX","TRI"],c:0},
+  {q:"À quoi sert un tableau croisé dynamique ?",o:["Insérer une image","Résumer et analyser de grandes quantités de données","Corriger l'orthographe","Créer une présentation"],c:1},
+  {q:"Quelle fonction recherche une valeur dans une colonne ?",o:["RECHERCHEV","SOMME.SI","MAX","CONCATENER"],c:0},
+  {q:"Que permet la mise en forme conditionnelle ?",o:["Changer automatiquement l'apparence des cellules selon une règle","Fusionner des feuilles","Créer un publipostage","Protéger le classeur"],c:0},
+ ]},
+ project:{text:"Créez votre propre budget personnel mensuel dans Excel.",
+   steps:["Listez vos catégories de revenus et de dépenses.","Calculez les totaux avec la fonction SOMME.","Appliquez une mise en forme conditionnelle pour repérer les dépassements.","Créez un graphique en secteurs de la répartition de vos dépenses.","Enregistrez votre fichier."]}},
+
+{id:'ppt',name:'PowerPoint — Présentations',level:'Débutant → Intermédiaire',duration:'4 à 6 heures',
+ lessons:[
+  {title:'4.1 — Bases',
+   objectives:["Se repérer dans l'interface PowerPoint","Choisir une disposition et un thème"],
+   html:`<p>Une présentation est composée de <strong>diapositives</strong>. Chaque diapositive suit une <strong>disposition</strong> (titre seul, titre + contenu…) modifiable via Accueil &gt; Disposition. Un <strong>thème</strong> (onglet Création) applique une charte de couleurs et de polices cohérente à toute la présentation.</p>`,
+   exercise:["Créez une présentation de 3 diapositives avec un thème de votre choix.","Dupliquez une diapositive et modifiez sa disposition."],
+   video:'https://www.youtube.com/playlist?list=PL8sQnj6qF1LvgLT416p5ekDP8WwXyr2fj',
+   videoCaption:'Formation Microsoft PowerPoint (playlist complète, 37 vidéos) — à suivre au fil des leçons de ce module.'},
+  {title:'4.2 — Contenu visuel',
+   objectives:["Insérer texte, images, formes et SmartArt"],
+   html:`<p>L'onglet Insertion permet d'ajouter des zones de texte, images et formes. Les <strong>SmartArt</strong> transforment une liste à puces en schéma graphique (processus, hiérarchie, cycle) en quelques clics : Insertion &gt; SmartArt.</p>`,
+   exercise:["Insérez une image sur une diapositive et redimensionnez-la.","Convertissez une liste à puces en SmartArt."],
+   video:null,videoCaption:''},
+  {title:'4.3 — Animations et transitions',
+   objectives:["Utiliser les animations et transitions avec modération"],
+   html:`<p>Les <strong>animations</strong> (onglet Animations) font apparaître ou bouger un élément sur une diapositive. Les <strong>transitions</strong> (onglet Transitions) gèrent le passage d'une diapositive à l'autre. Recommandation : les utiliser avec modération, pour ne pas distraire le public de votre message.</p>`,
+   exercise:["Ajoutez une animation d'entrée sur un titre.","Appliquez une transition simple entre deux diapositives."],
+   video:null,videoCaption:''},
+  {title:'4.4 — Multimédia',
+   objectives:["Insérer une vidéo ou un son dans une diapositive"],
+   html:`<p>Insertion &gt; Vidéo (depuis un fichier ou en ligne) ou Insertion &gt; Audio. Une fois insérée, la vidéo peut être découpée et ses options de lecture (automatique, au clic) réglées dans l'onglet Lecture.</p>`,
+   exercise:["Insérez une vidéo sur une diapositive et réglez sa lecture automatique."],
+   video:null,videoCaption:''},
+  {title:'4.5 — Techniques de présentation',
+   objectives:["Utiliser le mode présentateur","Gérer le minutage"],
+   html:`<p>Le <strong>mode présentateur</strong> (Diaporama &gt; Mode présentateur) affiche vos notes sur votre écran pendant que le public ne voit que la diapositive. L'outil Répétition du minutage (Diaporama &gt; Répéter la présentation) aide à respecter une durée cible.</p>`,
+   exercise:["Ajoutez des notes à 2 diapositives.","Lancez le mode présentateur et répétez votre passage en le chronométrant."],
+   video:null,videoCaption:''},
+  {title:'4.6 — Cas pratiques',
+   objectives:["Construire une présentation orientée résultat"],
+   html:`<p>Trois formats courants : le <strong>pitch professionnel</strong> (court, percutant), la <strong>soutenance</strong> (structurée, avec table des matières visuelle), et la <strong>présentation commerciale</strong> (orientée bénéfices client, avec appel à l'action final).</p>`,
+   exercise:["Choisissez un des trois formats et construisez une présentation de 5 diapositives."],
+   video:null,videoCaption:''},
+ ],
+ quiz:{questions:[
+  {q:"Que permet le mode présentateur ?",o:["Voir ses notes pendant que le public voit la diapo","Modifier une diapo en direct","Exporter en PDF","Ajouter une transition"],c:0},
+  {q:"Que sont les SmartArt ?",o:["Des vidéos","Des schémas graphiques prêts à l'emploi","Des formules Excel","Des macros"],c:1},
+  {q:"Quel conseil est recommandé pour les animations ?",o:["En mettre le plus possible","Les utiliser avec modération","Ne jamais en utiliser","Les remplacer par du son"],c:1},
+  {q:"Comment insérer une vidéo dans une diapositive ?",o:["Onglet Insertion > Vidéo","Onglet Accueil > Police","Onglet Révision","Onglet Fichier > Imprimer"],c:0},
+  {q:"Qu'est-ce qu'un thème dans PowerPoint ?",o:["Un ensemble cohérent de couleurs, polices et effets","Un type de graphique","Une fonction Excel","Un raccourci clavier"],c:0},
+ ]},
+ project:{text:"Construisez un pitch de 5 diapositives pour présenter un projet de votre choix.",
+   steps:["Diapositive 1 : titre et accroche.","Diapositive 2 : le problème que vous résolvez.","Diapositive 3 : votre solution.","Diapositive 4 : bénéfices ou preuves (chiffres, exemples).","Diapositive 5 : appel à l'action.","Appliquez un thème cohérent et répétez votre présentation en mode présentateur en moins de 3 minutes."]}},
+
+{id:'access',name:'Access — Bases de données',level:'Débutant → Intermédiaire',duration:'8 à 10 heures',
+ lessons:[
+  {title:'5.1 — Concepts de base',
+   objectives:["Comprendre ce qu'est une base de données","Distinguer tables, champs et enregistrements"],
+   html:`<p>Une <strong>base de données</strong> organise des informations de façon structurée. Une <strong>table</strong> ressemble à un tableau : chaque <strong>champ</strong> est une colonne (ex. Nom, Email) et chaque <strong>enregistrement</strong> est une ligne complète (ex. les infos d'un client).</p>`,
+   exercise:["Ouvrez Access et explorez une base d'exemple fournie par le logiciel.","Identifiez les champs et enregistrements d'une table existante."],
+   video:'https://www.youtube.com/playlist?list=PLFulHXLQ5Hk1K6hkMn7m5klQH9-WBCpS8',
+   videoCaption:'Créer sa première base de données Access (playlist, 6 vidéos) — à suivre au fil des leçons de ce module.'},
+  {title:'5.2 — Création de tables',
+   objectives:["Créer une table avec les bons types de données","Définir une clé primaire"],
+   html:`<p>Lors de la création d'une table (mode Création), chaque champ reçoit un <strong>type de données</strong> (Texte court, Numérique, Date/Heure…). La <strong>clé primaire</strong> identifie de façon unique chaque enregistrement (souvent un identifiant auto-numéroté).</p>`,
+   exercise:["Créez une table « Clients » avec les champs Nom, Email, Téléphone.","Définissez un champ ID en clé primaire."],
+   video:null,videoCaption:''},
+  {title:'5.3 — Relations entre tables',
+   objectives:["Comprendre les relations entre tables","Appliquer l'intégrité référentielle"],
+   html:`<p>Deux tables peuvent être liées (ex. Clients et Commandes) via un champ commun. La fenêtre Relations permet de créer ce lien. L'<strong>intégrité référentielle</strong> garantit la cohérence des données entre les tables liées (impossible d'avoir une commande sans client existant).</p>`,
+   exercise:["Créez une table « Commandes » liée à la table « Clients ».","Activez l'intégrité référentielle sur cette relation."],
+   video:null,videoCaption:''},
+  {title:'5.4 — Requêtes',
+   objectives:["Créer une requête de sélection avec critères","Ajouter un champ calculé"],
+   html:`<p>Une <strong>requête de sélection</strong> (mode Création de requête) extrait des données selon des critères (ex. clients d'une ville donnée). Un <strong>champ calculé</strong> permet d'afficher un résultat obtenu à partir d'autres champs (ex. total = quantité × prix).</p>`,
+   exercise:["Créez une requête affichant uniquement les clients d'une ville précise.","Ajoutez un champ calculé à une requête."],
+   video:null,videoCaption:''},
+  {title:'5.5 — Formulaires et états',
+   objectives:["Créer un formulaire de saisie","Créer un état pour l'impression"],
+   html:`<p>Un <strong>formulaire</strong> (Assistant Formulaire) offre une interface conviviale pour saisir des données sans manipuler directement la table. Un <strong>état</strong> (Assistant État) met en page les données pour l'impression ou un rapport.</p>`,
+   exercise:["Créez un formulaire de saisie pour la table Clients.","Créez un état listant tous les clients."],
+   video:null,videoCaption:''},
+  {title:'5.6 — Cas pratique',
+   objectives:["Mettre en pratique l'ensemble du module"],
+   html:`<p>Un cas classique consiste à gérer un fichier clients ou un suivi de stock complet : tables liées, requêtes de recherche, formulaire de saisie et état imprimable.</p>`,
+   exercise:["Construisez une petite base de gestion (clients ou stock) réunissant tables, requête, formulaire et état."],
+   video:null,videoCaption:''},
+ ],
+ quiz:{questions:[
+  {q:"Qu'est-ce qu'un enregistrement dans une base de données ?",o:["Une colonne","Une ligne complète d'une table","Un fichier PDF","Une macro"],c:1},
+  {q:"À quoi sert une clé primaire ?",o:["Identifier de façon unique chaque enregistrement","Trier les colonnes","Créer une diapositive","Calculer une moyenne"],c:0},
+  {q:"Que permet une requête de sélection ?",o:["Modifier le design d'un formulaire","Extraire des données selon des critères","Imprimer un état","Compresser une table"],c:1},
+  {q:"Quel objet Access sert à saisir des données facilement ?",o:["Table","Formulaire","Requête","Macro"],c:1},
+  {q:"Que garantit l'intégrité référentielle entre deux tables liées ?",o:["La cohérence des données entre les tables","La rapidité d'exécution","Le design des formulaires","La sécurité du mot de passe"],c:0},
+ ]},
+ project:{text:"Créez une base de données de gestion clients complète.",
+   steps:["Créez une table Clients avec ses champs et sa clé primaire.","Créez une table Commandes liée à Clients avec intégrité référentielle.","Créez une requête de sélection filtrant par ville ou par date.","Créez un formulaire de saisie pour les clients.","Créez un état imprimable listant les commandes."]}},
+];
+
+let state = {};
+try{ state = JSON.parse(localStorage.getItem('bureautique_progress_v3')||'{}'); }catch(e){ state = {}; }
+function saveState(){ try{ localStorage.setItem('bureautique_progress_v3', JSON.stringify(state)); }catch(e){} }
+function getModState(modId){
+  if(!state[modId]) state[modId] = { lessons:{}, quiz:{passed:false,score:null}, project:{checked:false} };
+  return state[modId];
+}
+
+const modulesEl = document.getElementById('modules');
+
+function lessonsAllDone(mod,ms){ return mod.lessons.every((l,i)=> ms.lessons[i] && ms.lessons[i].checked); }
+function moduleValidated(mod,ms){ return lessonsAllDone(mod,ms) && ms.quiz.passed && (mod.project ? ms.project.checked : true); }
+
+MODULES.forEach((mod, mi)=>{
+  const ms = getModState(mod.id);
+  const det = document.createElement('details');
+  det.className='module';
+  det.dataset.done = moduleValidated(mod,ms);
+  det.innerHTML = `<summary><span class="badge">✓</span> <span>${mod.name}<span class="mod-meta">${mod.level} · ${mod.duration}</span></span> <span class="chev">▾</span></summary><div class="mod-body" id="body-${mod.id}"></div>`;
+  modulesEl.appendChild(det);
+  const body = det.querySelector(`#body-${mod.id}`);
+
+  mod.lessons.forEach((lesson,li)=>{
+    if(!ms.lessons[li]) ms.lessons[li] = {checked:false};
+    const lid = `${mod.id}-${li}`;
+    const prevDone = li===0 ? true : ms.lessons[li-1].checked;
+    const ld = document.createElement('div');
+    ld.className = 'lesson' + (ms.lessons[li].checked?' done':'') + (!prevDone?' locked':'');
+    ld.innerHTML = `
+      <div class="lesson-head"><span class="lesson-badge">✓</span> ${lesson.title}</div>
+      ${lesson.objectives && lesson.objectives.length?`<div class="objectives"><strong>🎯 Objectifs</strong><ul>${lesson.objectives.map(o=>`<li>${o}</li>`).join('')}</ul></div>`:''}
+      <div class="content-text">${lesson.html}</div>
+      ${lesson.exercise && lesson.exercise.length?`<div class="exercise"><strong>✏️ Exercice pratique</strong><ol>${lesson.exercise.map(s=>`<li>${s}</li>`).join('')}</ol></div>`:''}
+      ${lesson.video?`<a class="video-link" href="${lesson.video}" target="_blank" rel="noopener">▶ Regarder la ressource vidéo</a>`:''}
+      ${lesson.videoCaption?`<div class="video-caption">${lesson.videoCaption}</div>`:''}
+      <div class="check-row"><input type="checkbox" id="chk-${lid}" ${ms.lessons[li].checked?'checked':''} ${!prevDone?'disabled':''}><label for="chk-${lid}">J'ai terminé cette leçon</label></div>`;
+    body.appendChild(ld);
+    ld.querySelector(`#chk-${lid}`).addEventListener('change', e=>{
+      ms.lessons[li].checked = e.target.checked; saveState(); rebuild();
+    });
+  });
+
+  // Quiz
+  const quizBox = document.createElement('div'); quizBox.className='quiz-box'; quizBox.id=`quizbox-${mod.id}`;
+  quizBox.innerHTML = `<h4>Quiz d'auto-évaluation</h4>`;
+  const qc = document.createElement('div');
+  mod.quiz.questions.forEach((q,qi)=>{
+    const qd = document.createElement('div'); qd.className='q';
+    qd.innerHTML = `<p>${qi+1}. ${q.q}</p>` + q.o.map((opt,oi)=>`<label><input type="radio" name="${mod.id}-quiz-q${qi}" value="${oi}">${opt}</label>`).join('');
+    qc.appendChild(qd);
+  });
+  quizBox.appendChild(qc);
+  const qa = document.createElement('div'); qa.className='quiz-actions';
+  qa.innerHTML = `<button class="btn-primary" id="checkquiz-${mod.id}">Valider le quiz</button><span class="quiz-result" id="resquiz-${mod.id}"></span>`;
+  quizBox.appendChild(qa);
+  body.appendChild(quizBox);
+  qa.querySelector(`#checkquiz-${mod.id}`).addEventListener('click', ()=>{
+    let correct=0;
+    mod.quiz.questions.forEach((q,qi)=>{
+      const sel = qc.querySelector(`input[name="${mod.id}-quiz-q${qi}"]:checked`);
+      if(sel && parseInt(sel.value)===q.c) correct++;
+    });
+    const pct = Math.round(correct/mod.quiz.questions.length*100);
+    ms.quiz.score=pct; ms.quiz.passed = pct>=60; saveState();
+    const res = document.getElementById(`resquiz-${mod.id}`);
+    res.textContent = `${correct}/${mod.quiz.questions.length} bonnes réponses (${pct}%) — ${ms.quiz.passed?'réussi ✅':'à refaire (60% requis)'}`;
+    res.className = 'quiz-result ' + (ms.quiz.passed?'pass':'fail');
+    rebuild();
+  });
+
+  // Projet final
+  if(mod.project){
+    const pd = document.createElement('div'); pd.className='project-box'; pd.id=`project-${mod.id}`;
+    pd.innerHTML = `<h4>🏁 Projet final du module</h4><p>${mod.project.text}</p><ol>${mod.project.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+      <div class="check-row"><input type="checkbox" id="projchk-${mod.id}" ${ms.project.checked?'checked':''}><label for="projchk-${mod.id}">J'ai réalisé le projet final</label></div>`;
+    body.appendChild(pd);
+    pd.querySelector(`#projchk-${mod.id}`).addEventListener('change', e=>{ ms.project.checked = e.target.checked; saveState(); rebuild(); });
+  }
+});
+
+function rebuild(){
+  let validated=0;
+  document.querySelectorAll('.module').forEach((det,mi)=>{
+    const mod = MODULES[mi]; const ms = getModState(mod.id);
+    const allLessonsDone = lessonsAllDone(mod,ms);
+    mod.lessons.forEach((lesson,li)=>{
+      const prevDone = li===0?true:ms.lessons[li-1].checked;
+      const ld = det.querySelectorAll('.lesson')[li];
+      const chk = ld.querySelector('input[type=checkbox]');
+      chk.disabled = !prevDone;
+      ld.classList.toggle('locked', !prevDone);
+      ld.classList.toggle('done', ms.lessons[li].checked);
+    });
+    const quizBox = det.querySelector(`#quizbox-${mod.id}`);
+    quizBox.style.opacity = allLessonsDone ? '1' : '.5';
+    quizBox.querySelectorAll('input,button').forEach(el=> el.disabled = !allLessonsDone);
+    const projBox = det.querySelector(`#project-${mod.id}`);
+    if(projBox){
+      const unlocked = ms.quiz.passed;
+      projBox.style.opacity = unlocked ? '1' : '.5';
+      projBox.querySelectorAll('input').forEach(el=> el.disabled = !unlocked);
+    }
+    det.dataset.done = moduleValidated(mod,ms);
+    if(det.dataset.done==='true') validated++;
+  });
+  const pct = Math.round(validated/MODULES.length*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = `${validated} / ${MODULES.length} modules validés`;
+  document.getElementById('progressPct').textContent = pct+'%';
+
+  const allDone = validated===MODULES.length;
+  const certGenerated = !!(state.certificate && state.certificate.generated);
+  document.getElementById('lockMsg').style.display = (allDone || certGenerated) ? 'none' : 'block';
+  document.getElementById('unlockArea').style.display = (allDone && !certGenerated) ? 'block' : 'none';
+  if(certGenerated){
+    document.getElementById('certName').textContent = state.certificate.name;
+    document.getElementById('certDate').textContent = state.certificate.date;
+    document.getElementById('certificate').style.display='block';
+    document.getElementById('printBtn').style.display='inline-block';
+  }
+}
+
+document.getElementById('genCertBtn').addEventListener('click', ()=>{
+  if(state.certificate && state.certificate.generated) return;
+  const name = document.getElementById('learnerName').value.trim();
+  if(!name){ alert('Veuillez saisir votre nom.'); return; }
+  state.certificate = { generated:true, name, date: new Date().toLocaleDateString('fr-FR',{year:'numeric',month:'long',day:'numeric'}) };
+  saveState();
+  rebuild();
+});
+document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+
+rebuild();
+</script>
+</body>
+</html>
